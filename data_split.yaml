@@ -1,0 +1,20 @@
+names:
+- Fire alarm
+- Left Exit
+- Left/Right Exit
+- Right Exit
+- Straight Exit
+- blocked emergency exit
+- boxes blocking exit
+- emergency exit door
+- exit block violation
+- exit-sign
+- head
+- helmet
+- objects blocked emergency exit
+- person
+- sign
+nc: 15
+test: C:\Users\sands\Downloads\Artificial Intelligence\final project\train\test\images
+train: C:\Users\sands\Downloads\Artificial Intelligence\final project\train\train\images
+val: C:\Users\sands\Downloads\Artificial Intelligence\final project\train\valid\images
