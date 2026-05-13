@@ -48,7 +48,9 @@ BCS407-Campus-Safety-Detection-P2/
 │                             # (used when merging the additional dataset into Exp 2)
 ├── make_grid.py              # Combines result images into a single grid (both experiments)
 ├── visualize_results.py      # Generates per-class and summary visualisations (both experiments)
-├── run_model.py
+├── run_model.py              # Run inference on a folder of images using the trained model
+│                             # Update MODEL_PATH and SOURCE at the top of the script before running
+├── epoch_log.csv             # Per-epoch training log (GPU usage, VRAM, duration, metrics)
 │
 ├── train/                    # Experiment 1 dataset
 │   ├── data.yaml             # Class definitions and split paths for Exp 1
@@ -57,7 +59,6 @@ BCS407-Campus-Safety-Detection-P2/
 │   ├── train/                # Training split
 │   ├── valid/                # Validation split
 │   └── test/                 # Test split
-│
 │
 └── runs/                     # Training outputs
     ├── final_project_model/  # Experiment 1 model outputs
@@ -86,6 +87,7 @@ All model weights and datasets are hosted on Hugging Face.
 | `last.pt` | Final epoch checkpoint from Exp 2 | [Download](https://huggingface.co/Hassanmujtabat/campus-safety-detection-exp2/blob/main/last.pt) |
 | Additional dataset | Emergency exit images added for Exp 2 | [Download](https://huggingface.co/Hassanmujtabat/campus-safety-detection-exp2/blob/main/Emergency%20Exit%20Signs.yolov8.zip) |
 | Full combined dataset | All images and labels merged, labels remapped and corrected | [Download](https://huggingface.co/Hassanmujtabat/campus-safety-detection-exp2/blob/main/train.rar) |
+| Train/val/test split | Pre-split dataset (2,167 images — 70% train / 20% val / 10% test) | [Download](https://huggingface.co/Hassanmujtabat/campus-safety-detection-exp2/blob/main/train%20split.zip) |
 
 ---
 
@@ -120,6 +122,16 @@ py -3.12 Train.py
 py -3.12 Train_Exp2.py
 ```
 
+### Run Inference on a Folder of Images
+
+Update `MODEL_PATH` and `SOURCE` at the top of the script to point to your model and image folder, then run:
+
+```bash
+py -3.12 run_model.py
+```
+
+Results with bounding boxes are saved to the `results/` folder. A detection summary is printed to the terminal.
+
 ### Remap Dataset Labels
 
 Run this if you are merging the additional dataset with the original and need to realign class IDs to the unified 15-class schema:
@@ -145,7 +157,7 @@ py -3.12 make_grid.py
 ## Dataset Notes
 
 - **Experiment 1:** Uses the original Project 1 dataset. Train/validation/test split is handled within the `train/` folder as defined in `data.yaml`.
-- **Experiment 2:** Expands the dataset with additional emergency exit images. Labels from the added dataset were remapped using `remap_labels.py` to align with the unified 15-class schema. The split for Exp 2 was performed separately from Exp 1.
+- **Experiment 2:** Expands the dataset with additional emergency exit images to 2,167 total images. Labels from the added dataset were remapped using `remap_labels.py` to align with the unified 15-class schema. The dataset is split 70% train / 20% validation / 10% test.
 - All images comply with ethical guidelines: no identifiable faces, no license plates, no personal data.
 
 ---
@@ -155,6 +167,7 @@ py -3.12 make_grid.py
 - Random seeds are set at the start of each training script.
 - Environment: Windows 11, Python 3.12, CUDA-enabled GPU, Ultralytics YOLOv8
 - All hyperparameters are documented within the training scripts.
+- Per-epoch training logs are available in `epoch_log.csv`.
 
 ---
 
