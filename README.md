@@ -48,6 +48,7 @@ BCS407-Campus-Safety-Detection-P2/
 │                             # (used when merging the additional dataset into Exp 2)
 ├── make_grid.py              # Combines result images into a single grid (both experiments)
 ├── visualize_results.py      # Generates per-class and summary visualisations (both experiments)
+├── run_model.py
 │
 ├── train/                    # Experiment 1 dataset
 │   ├── data.yaml             # Class definitions and split paths for Exp 1
@@ -56,6 +57,7 @@ BCS407-Campus-Safety-Detection-P2/
 │   ├── train/                # Training split
 │   ├── valid/                # Validation split
 │   └── test/                 # Test split
+│
 │
 └── runs/                     # Training outputs
     ├── final_project_model/  # Experiment 1 model outputs
